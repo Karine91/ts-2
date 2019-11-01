@@ -17,7 +17,7 @@ interface DispatchProps {
 type Props = StateProps & DispatchProps;
 
 
-const UsersList: React.SFC<Props> = (props: Props) => {
+const UsersList: React.FC<Props> = (props) => {
 
     useEffect(() => {
         props.getUsersList();
@@ -25,7 +25,7 @@ const UsersList: React.SFC<Props> = (props: Props) => {
 
     return (
         <div>
-
+            <pre>{JSON.stringify(props.users)}</pre>
         </div>
     )
 }
@@ -38,4 +38,4 @@ const mapDispatchToProps = {
     getUsersList
 }
 
-export default connect<StateProps, DispatchProps, {}>(mapStateToProps, mapDispatchToProps)(UsersList);
+export default connect<StateProps, DispatchProps, {}, AppState>(mapStateToProps, mapDispatchToProps)(UsersList);

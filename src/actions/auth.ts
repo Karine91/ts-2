@@ -1,6 +1,7 @@
 
 import * as types from './actionTypes';
 import { IUser, IUserCreated, TError } from '../types';
+import { ActionCreator } from 'redux';
 
 
 export interface ILoginUserAction {
@@ -18,7 +19,7 @@ export interface ILoginUserErrorAction {
     error: TError
 }
 
-export const loginUser = (user: IUser) => ({
+export const loginUser: ActionCreator<ILoginUserAction> = (user: IUser) => ({
     type: types.LOGIN_USER,
     payload: user
 });

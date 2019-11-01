@@ -18,7 +18,7 @@ interface DispatchProps {
 
 type Props = StateProps & DispatchProps;
 
-const Login: React.SFC<Props> = (props: Props) => {
+const Login: React.FC<Props> = (props) => {
     const { loginUser, isAuthenticated } = props;
 
     const onSubmit = (values: FormData | any) => {
@@ -43,5 +43,5 @@ const mapStateToProps = (state: AppState) => ({
 
 const mapDispatchToProps = { loginUser };
 
-export default connect<StateProps, DispatchProps, {}>(mapStateToProps, mapDispatchToProps)(Login);
+export default connect<StateProps, DispatchProps, {}, AppState>(mapStateToProps, mapDispatchToProps)(Login);
 

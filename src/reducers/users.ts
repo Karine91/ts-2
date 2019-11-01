@@ -2,8 +2,8 @@
 import { IUserCreated } from '../types';
 import { getUsersListActionTypes } from '../actions/users';
 
-const initState = {
-    users: []
+const initState: IUsersState = {
+    users: [],
 }
 
 export interface IUsersState {
