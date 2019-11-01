@@ -1,5 +1,6 @@
 import * as types from './actionTypes';
 import { IUserCreated, TError } from '../types';
+import { ActionCreator } from 'redux';
 
 export interface IGetUsersListAction {
     type: typeof types.GET_USERS_LIST
@@ -15,7 +16,7 @@ export interface IGetUsersListErrorAction {
     payload: TError
 }
 
-export const getUsersList = () => ({
+export const getUsersList: ActionCreator<IGetUsersListAction> = () => ({
     type: types.GET_USERS_LIST
 });
 
