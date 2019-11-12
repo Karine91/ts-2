@@ -5,6 +5,23 @@ export interface IUserCreated extends IUser {
     createdAt: Date
 }
 
+export interface IUserSaved {
+    id: string,
+    email: string,
+    first_name: string,
+    last_name: string,
+    avatar: string
+}
+
+export interface IUsersList {
+    page: number,
+    per_page: number,
+    total: number,
+    total_pages: number,
+    data: IUserSaved[]
+}
+
+
 export type TError = {
     message: string
 }

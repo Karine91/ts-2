@@ -1,5 +1,5 @@
 import * as types from './actionTypes';
-import { IUserCreated, TError } from '../types';
+import { IUserSaved, TError, IUsersList } from '../types';
 import { ActionCreator } from 'redux';
 
 export interface IGetUsersListAction {
@@ -8,7 +8,7 @@ export interface IGetUsersListAction {
 
 export interface IGetUsersListSuccessAction {
     type: typeof types.GET_USERS_LIST_SUCCESS,
-    payload: IUserCreated[]
+    payload: IUsersList
 }
 
 export interface IGetUsersListErrorAction {
@@ -20,12 +20,12 @@ export const getUsersList: ActionCreator<IGetUsersListAction> = () => ({
     type: types.GET_USERS_LIST
 });
 
-export const getUsersListSuccess = (payload: IUserCreated[]) => ({
+export const getUsersListSuccess: ActionCreator<IGetUsersListSuccessAction> = (payload: IUsersList) => ({
     type: types.GET_USERS_LIST_SUCCESS,
     payload
 });
 
-export const getUsersListError = (error: TError) => ({
+export const getUsersListError: ActionCreator<IGetUsersListErrorAction> = (error: TError) => ({
     type: types.GET_USERS_LIST_ERROR,
     payload: error
 });

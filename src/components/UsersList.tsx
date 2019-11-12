@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import { AppState } from '../store';
 
 import { getUsersList, IGetUsersListAction } from '../actions/users'
-import { IUserCreated } from '../types';
+import { IUsersList } from '../types';
 
 interface StateProps {
-    users: IUserCreated[]
+    users: IUsersList
 }
 
 interface DispatchProps {
@@ -17,15 +17,15 @@ interface DispatchProps {
 type Props = StateProps & DispatchProps;
 
 
-const UsersList: React.FC<Props> = (props) => {
+const UsersList: React.FC<Props> = ({ users, getUsersList }) => {
 
     useEffect(() => {
-        props.getUsersList();
+        getUsersList();
     }, []);
 
     return (
         <div>
-            <pre>{JSON.stringify(props.users)}</pre>
+            <div>{users.data && users.data.map(el => (<div></div>))}</div>
         </div>
     )
 }
