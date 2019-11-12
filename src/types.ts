@@ -1,3 +1,5 @@
+import { AxiosResponse } from "axios";
+
 export interface IUser { email: string, password: string };
 
 export interface IUserCreated extends IUser {
@@ -22,6 +24,4 @@ export interface IUsersList {
 }
 
 
-export type TError = {
-    message: string
-}
+export type TError = AxiosResponse<{ error: string }>;

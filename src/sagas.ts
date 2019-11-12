@@ -8,10 +8,10 @@ import * as types from './actions/actionTypes';
 
 function* loginUserSaga({ payload }: ILoginUserAction) {
     try {
-        const { data } = yield axios.post('/users', payload);
+        const { data } = yield axios.post('/login', payload);
         yield put(loginUserSuccess(data));
     } catch (error) {
-        yield put(loginUserError(error));
+        yield put(loginUserError(error.response));
     }
 }
 
@@ -20,7 +20,7 @@ function* getUsersSaga() {
         const { data } = yield axios.get('/users');
         yield put(getUsersListSuccess(data));
     } catch (error) {
-        yield put(getUsersListError(error))
+        yield put(getUsersListError(error.response))
     }
 }
 

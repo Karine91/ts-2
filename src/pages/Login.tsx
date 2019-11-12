@@ -1,15 +1,17 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { ActionCreator } from 'redux';
 import { connect } from 'react-redux';
 import { AppState } from '../store';
-
+import { SubmissionError } from 'redux-form';
 import LoginForm from '../components/LoginForm';
 import UsersList from '../components/UsersList';
+import { TError } from '../types';
 
 import { loginUser, ILoginUserAction } from '../actions/auth';
 
 interface StateProps {
     isAuthenticated: boolean
+    error?: TError
 }
 
 interface DispatchProps {
@@ -38,7 +40,8 @@ const Login: React.FC<Props> = (props) => {
 }
 
 const mapStateToProps = (state: AppState) => ({
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    error: state.auth.error
 });
 
 const mapDispatchToProps = { loginUser };

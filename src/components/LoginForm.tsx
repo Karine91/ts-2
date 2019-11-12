@@ -1,11 +1,8 @@
-import React, { FunctionComponent } from 'react';
-import { compose, ActionCreator } from 'redux';
-import { AppState } from '../store';
+import React from 'react';
 import { FormControl, Button } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { Field, reduxForm, InjectedFormProps, WrappedFieldProps } from 'redux-form';
-
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -28,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const Login = (props: InjectedFormProps) => {
-    const { handleSubmit, pristine, submitting, reset } = props;
+    const { handleSubmit, pristine, submitting, reset, error } = props;
 
     const classes = useStyles();
 
@@ -75,7 +72,7 @@ const Login = (props: InjectedFormProps) => {
                     />
                 </FormControl>
             </div>
-
+            {error && <strong>{error}</strong>}
             <div>
                 <Button disabled={pristine || submitting} type="submit" variant="contained" color="primary" className={classes.button}>
                     Submit
@@ -87,10 +84,6 @@ const Login = (props: InjectedFormProps) => {
         </form>
     )
 }
-
-const mapStateToProps = (state: AppState) => ({
-    isAuthenticated: state.auth.isAuthenticated
-});
 
 export default reduxForm({
     form: 'login'

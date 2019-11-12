@@ -5,7 +5,7 @@ import { ActionCreator } from 'redux';
 
 
 export interface ILoginUserAction {
-    type: typeof types.LOGIN_USER,
+    type: 'LOGIN_USER'
     payload: IUser
 }
 

@@ -1,41 +1,24 @@
 import React, { useEffect } from 'react';
-import { ActionCreator } from 'redux';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../store';
 
-import { getUsersList, IGetUsersListAction } from '../actions/users'
-import { IUsersList } from '../types';
-
-interface StateProps {
-    users: IUsersList
-}
-
-interface DispatchProps {
-    getUsersList: ActionCreator<IGetUsersListAction>
-}
-
-type Props = StateProps & DispatchProps;
+import { getUsersList } from '../actions/users'
 
 
-const UsersList: React.FC<Props> = ({ users, getUsersList }) => {
+const UsersList: React.FC = () => {
+    const dispatch = useDispatch();
+    const users = useSelector((state: AppState) => (state.users.users));
 
     useEffect(() => {
-        getUsersList();
+        dispatch(getUsersList());
     }, []);
 
     return (
         <div>
-            <div>{users.data && users.data.map(el => (<div></div>))}</div>
+            <div>{users.data && users.data.map(el => (<div><small><pre>{JSON.stringify(el, null, 2)}</pre></small></div>))}</div>
         </div>
     )
 }
 
-const mapStateToProps = (state: AppState) => ({
-    users: state.users.users
-});
 
-const mapDispatchToProps = {
-    getUsersList
-}
-
-export default connect<StateProps, DispatchProps, {}, AppState>(mapStateToProps, mapDispatchToProps)(UsersList);
+export default UsersList;
