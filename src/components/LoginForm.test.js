@@ -20,17 +20,14 @@ const history = {
     listen: () => {}
   },
   defaultProps = {
-    propertyType: 1,
     handleSubmit: fn => fn,
     onSubmit: jest.fn(),
-    onSubmitAndNavigate: jest.fn(),
-    onNavigate: jest.fn()
   },
   store = createStore(
     combineReducers({ form: formReducer })
   ),
   Decorated = reduxForm({
-    form: "property-details-form"
+    form: "login"
   })(LoginForm),
   LoginFormComponentWrapper = props => (
     <Provider store={store}>
@@ -45,12 +42,39 @@ describe("Login Form", () => {
       wrapper = mount(<LoginFormComponentWrapper />);
     });
 
-  it("submit btn should be disabled", () => {
+  it("Buttons should be disabled", () => {
     expect(
       wrapper.find(
-        "button[type='submit']"
-      ).props().disabled
+        "button"
+      ).at(0).props().disabled
+    ).toEqual(true);
+    expect(
+      wrapper
+        .find("button")
+        .at(1)
+        .props().disabled
     ).toEqual(true);
   });
-  
+
+
+  it('Buttons should not be disabled if any changes', () => {
+      const firstInput = wrapper.find('input').first();
+      firstInput.simulate("change", {
+        target: { value: "test" }
+      });
+
+      expect(
+        wrapper
+          .find("button")
+          .at(0)
+          .props().disabled
+      ).toBeFalsy();
+      expect(
+        wrapper
+          .find("button")
+          .at(1)
+          .props().disabled
+      ).toBeFalsy();
+  })
+
 });
