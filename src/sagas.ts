@@ -1,17 +1,20 @@
-import { all, put, takeLatest } from 'redux-saga/effects';
+import { all, put, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
-
+import { stopSubmit } from 'redux-form';
 import { loginUserSuccess, loginUserError, ILoginUserAction } from './actions/auth';
 import { getUsersListSuccess, getUsersListError } from './actions/users';
 
 import * as types from './actions/actionTypes';
 
-function* loginUserSaga({ payload }: ILoginUserAction) {
+export function* loginUserSaga({ payload }: ILoginUserAction) {
     try {
-        const { data } = yield axios.post('/login', payload);
+        const { data } = yield call([axios, 'post'], '/login', payload);
         yield put(loginUserSuccess(data));
     } catch (error) {
         yield put(loginUserError(error.response));
+        yield put(stopSubmit('login', {
+            _error: error.response.data.error
+        }));
     }
 }
 

@@ -24,11 +24,30 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
+interface IRenderField {
+    id: string,
+    label: string
+}
+
+const renderField = ({ id, label }: IRenderField) => ({
+    input: { value, onChange }
+}: WrappedFieldProps) =>
+    <TextField
+        id="email"
+        value={value}
+        onChange={onChange}
+        label={label}
+        margin="normal"
+    />
+
+const renderEmailField = renderField({ id: 'email', label: "Email address" });
+const renderPasswordField = renderField({ id: 'password', label: "Password" });
+
 const Login = (props: InjectedFormProps) => {
     const { handleSubmit, pristine, submitting, reset, error } = props;
 
     const classes = useStyles();
-
+    
     return (
         <form onSubmit={handleSubmit}>
             <div>
@@ -36,18 +55,8 @@ const Login = (props: InjectedFormProps) => {
                     <Field
                         id="email"
                         name="email"
-                        component={({
-                            input: { value, onChange }
-                        }: WrappedFieldProps) =>
-                            <TextField
-                                id="email"
-                                value={value}
-                                onChange={onChange}
-                                className={classes.textField}
-                                label="Email address"
-                                margin="normal"
-                            />
-                        }
+                        className={classes.textField}
+                        component={renderEmailField}
                         type="text"
                     />
                 </FormControl>
@@ -56,23 +65,13 @@ const Login = (props: InjectedFormProps) => {
                 <FormControl>
                     <Field
                         name="password"
-                        component={({
-                            input: { value, onChange }
-                        }: WrappedFieldProps) =>
-                            <TextField
-                                id="password"
-                                value={value}
-                                onChange={onChange}
-                                className={classes.textField}
-                                label="Password"
-                                margin="normal"
-                            />
-                        }
+                        className={classes.textField}
+                        component={renderPasswordField}
                         type="text"
                     />
                 </FormControl>
             </div>
-            {error && <strong>{error}</strong>}
+            {error && <strong style={{ color: 'red' }}>{error}</strong>}
             <div>
                 <Button disabled={pristine || submitting} type="submit" variant="contained" color="primary" className={classes.button}>
                     Submit

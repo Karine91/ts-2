@@ -2,7 +2,6 @@ import React from 'react';
 import { ActionCreator } from 'redux';
 import { connect } from 'react-redux';
 import { AppState } from '../store';
-import { SubmissionError } from 'redux-form';
 import LoginForm from '../components/LoginForm';
 import UsersList from '../components/UsersList';
 import { TError } from '../types';
