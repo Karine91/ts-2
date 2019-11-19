@@ -8,7 +8,8 @@ import * as types from './actions/actionTypes';
 
 export function* loginUserSaga({ payload }: ILoginUserAction) {
     try {
-        const { data } = yield call([axios, 'post'], '/login', payload);
+        const { data } = yield call([axios, 'post'], '/register', payload);
+        
         yield put(loginUserSuccess(data));
     } catch (error) {
         yield put(loginUserError(error.response));

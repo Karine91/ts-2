@@ -43,10 +43,11 @@ const renderField = ({ id, label }: IRenderField) => ({
 const renderEmailField = renderField({ id: 'email', label: "Email address" });
 const renderPasswordField = renderField({ id: 'password', label: "Password" });
 
-const Login = (props: InjectedFormProps) => {
+export const Login = (props: InjectedFormProps) => {
     const { handleSubmit, pristine, submitting, reset, error } = props;
 
     const classes = useStyles();
+    
     
     return (
         <form onSubmit={handleSubmit}>
